@@ -1,0 +1,77 @@
+python -m venv venv
+venv\scripts\activate
+pip3 install django
+django-admin startproject prj
+cd prj
+
+
+py manage.py startapp newapp
+py manage.py makemigrations
+py manage.py migrate
+
+py manage.py shell
+from newapp.models import *
+
+
+user1 = User.objects.create(username='Mike', first_name='Frank')
+Author.objects.create(authorUser=user1)
+
+user2 = User.objects.create(username='Semyon', first_name='Ber')
+Author.objects.create(authorUser=user2)
+
+Category.objects.create(name='IT')
+
+Category.objects.create(name='Education')
+
+Post.objects.create(author=Author.objects.get(authorUser=User.objects.get(username='Mike')), categoryType='NW', title='smth title', text='smth text')
+
+Post.objects.create(author=Author.objects.get(authorUser=User.objects.get(username='Mike')), categoryType='AR', title='smth title2222', text='1234smth text')
+
+Post.objects.create(author=Author.objects.get(authorUser=User.objects.get(username='Semyon')), categoryType='AR', title='smth title22', text='222smth text')
+
+p1 = Post.objects.get(pk=1)
+p2 = Post.objects.get(pk=2)
+p3 = Post.objects.get(pk=3)
+c1 = Category.objects.get(name='IT')
+c2 = Category.objects.get(name='Education')
+p1.postCategory.add(c1)
+p2.postCategory.add(c2)
+p3.postCategory.add(c2)
+
+Comment.objects.create(commentUser=User.objects.get(username='Mike'), commentPost= Post.objects.get(pk=1), text='comment text')
+
+Comment.objects.create(commentUser=User.objects.get(username='Mike'), commentPost= Post.objects.get(pk=2), text='comment text')
+
+Comment.objects.create(commentUser=User.objects.get(username='Semyon'), commentPost= Post.objects.get(pk=3), text='comment32323 text')
+
+
+Post.objects.get(pk=1).like()
+Post.objects.get(pk=1).like()
+Post.objects.get(pk=1).like()
+
+Post.objects.get(pk=3).dislike()
+Post.objects.get(pk=3).dislike()
+
+Comment.objects.get(pk=2).like()
+Comment.objects.get(pk=1).like()
+
+Author.objects.get(authorUser=User.objects.get(username='Mike')).update_rating()
+Author.objects.get(authorUser=User.objects.get(username='Semyon')).update_rating()
+
+a = Author.objects.get(authorUser=User.objects.get(username='Semyon'))
+a.ratingAuthor
+
+a = Author.objects.get(authorUser=User.objects.get(username='Mike')).ratingAuthor
+
+bestAut = Author.objects.all().order_by('-ratingAuthor').values('authorUser', 'ratingAuthor')[0]
+print(bestAut)
+
+
+		По аналогии вывести лучший пост лучший комментарий
+
+
+bestPost = Post.objects.all().order_by('-rating').values('title', 'text', 'dateCreation', 'author', 'rating')[0]
+print(bestPost)
+
+bestCom = Comment.objects.all().order_by('-rating').values('commentPost', 'text', 'dateCreation', 'commentUser', 'rating')[0]
+print(bestCom)
