@@ -1,28 +1,21 @@
-class Cat:
-    def _init_(self, name, gender, age):
+# file 1: CatsFile.py
+
+class Cats:
+    def __init__(self, name, gender, age, home):
         self.name = name
         self.gender = gender
         self.age = age
+        self.home = home
+        
+    
+ # file 2: CatsFile_2.py
 
-    from cat import Cats
 
-    cats = [
-        {
-            "name": "Барон",
-            "gender": "Мальчик",
-            "age": "2 года",
-        }
-        ,
-        {
-            "name": "Сэм",
-            "gender": "Мальчик",
-            "age": "2 года",
+from CatsFile import Cats
 
-        },
-    ]
-    for cat in cats
-        cat_obj = Cat(name = cat.get("name"),
-                      gender = cat.get("gender"),
-                      age = cat.get("age"))
+A = Cats("Барон", "Мальчик", 2, False)
+B = Cats("Сэм", "Мальчик", 1, False)
 
-    print(cat_obj.name, cat_obj.gender, cat_obJ.age)
+
+print("Мохнатый ублюдок 1: ",(A.name),",",(A.gender), ", Возраст:",(A.age), "лет,",  "Имеет дом = ", (A.home) )
+print("Мохнатый ублюдок 2: ",(B.name),",",(B.gender), ", Возраст:",(B.age), "лет,",  "Имеет дом = ", (B.home) )
