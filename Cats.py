@@ -6,7 +6,10 @@ class Cats:
         self.gender = gender
         self.age = age
         self.home = home
-        
+    
+    def get_param(self):
+        print('Мохнатый ублюдок : ', (self.name), ',', (self.gender),', ' 'Возраст:',(self.age), 'лет',', '  "Имеет дом = ", (self.home) )
+
     
  # file 2: CatsFile_2.py
 
@@ -16,6 +19,5 @@ from CatsFile import Cats
 A = Cats("Барон", "Мальчик", 2, False)
 B = Cats("Сэм", "Мальчик", 1, False)
 
-
-print("Мохнатый ублюдок 1: ",(A.name),",",(A.gender), ", Возраст:",(A.age), "лет,",  "Имеет дом = ", (A.home) )
-print("Мохнатый ублюдок 2: ",(B.name),",",(B.gender), ", Возраст:",(B.age), "лет,",  "Имеет дом = ", (B.home) )
+A.get_param()
+B.get_param()
