@@ -63,7 +63,7 @@ class Comment(models.Model):
 
     def __str__(self):
         return  self.commentUser.username
-    def like(selfself):
+    def like(self):
         self.rating += 1
         self.save()
 
